@@ -1,9 +1,11 @@
 {
     "name": "version",
     "url" : "https://github.com/ypid/haxe-version",
-    "license": "LGPL-3.0",
+    "license": "LGPL",
+    "license_full": "LGPL-3.0",
     "tags": ["macro", "version", "git"],
     "description": "Haxe macros useful for including version strings (version from `haxelib.json`, git commit hash and Haxe version) to a target build.",
+    "releasenote": "Initial release.",
     "version": "1.0.0",
-    "contributors": ["Robin `ypid` Schneider"]
+    "contributors": ["ypid"]
 }

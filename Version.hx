@@ -11,6 +11,22 @@ class Version {
     }
 
     /**
+        Increment the version defined in the `haxelib.json` file. Example usage:
+
+            Increment version in hxml
+            --macro Version.incrementVersion()
+    **/
+
+    public static macro function incrementVersion(filename:String = 'haxelib.json'):Void {
+        var haxelib_json = haxe.Json.parse(sys.io.File.getContent(filename));
+
+        var result:Array<String> = haxelib_json.version.split('.');
+        result[result.length-1] = cast (Std.parseInt(result[result.length-1]) + 1);
+        haxelib_json.version = result.join('.');
+        sys.io.File.saveContent(filename, haxe.Json.stringify(haxelib_json, null, " "));
+    }
+
+    /**
         Return the latest git commit hash. Example usage:
 
             git commit hash from which this library was build.

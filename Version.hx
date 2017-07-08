@@ -42,6 +42,21 @@ class Version {
     }
 
     /**
+        Return the latest git tag. Example usage:
+
+            git tag from which this library was build.
+            public static var version_tag(default, never):String = Version.getGitTag();
+    **/
+    public static macro function getGitTag():haxe.macro.Expr {
+        var git_describe = new sys.io.Process('git', [ 'describe', '--abbrev=0', '--tags' ] );
+        if (git_describe.exitCode() != 0) {
+            throw("`git describe --abbrev=0 --tags` failed: " + git_rev_describe.stderr.readAll().toString());
+        }
+        var tag = git_describe.stdout.readLine();
+        return macro $v{tag};
+    }
+
+    /**
         Return the version of Haxe. Example usage:
 
             Version of Haxe used to build this library.

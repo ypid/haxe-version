@@ -50,7 +50,7 @@ class Version {
     public static macro function getGitTag():haxe.macro.Expr {
         var git_describe = new sys.io.Process('git', [ 'describe', '--abbrev=0', '--tags' ] );
         if (git_describe.exitCode() != 0) {
-            throw("`git describe --abbrev=0 --tags` failed: " + git_rev_describe.stderr.readAll().toString());
+            throw("`git describe --abbrev=0 --tags` failed: " + git_describe.stderr.readAll().toString());
         }
         var tag = git_describe.stdout.readLine();
         return macro $v{tag};

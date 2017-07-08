@@ -7,5 +7,8 @@
     "description": "Haxe macros useful for including version strings (version from `haxelib.json`, git commit hash and Haxe version) to a target build.",
     "releasenote": "Initial release.",
     "version": "1.1.0",
-    "contributors": ["ypid"]
+    "contributors": [
+      "ypid",
+      "endes123321"
+    ]
 }

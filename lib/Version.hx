@@ -80,14 +80,15 @@ class Version {
             public static var version_haxe_compiler(default, never):String = Version.getHaxeCompilerVersion();
     **/
     public static macro function getHaxeCompilerVersion():haxe.macro.Expr {
-        // Returns float number like: 3.201
-        // var haxe_ver = haxe.macro.Context.definedValue("haxe_ver");
-
         var proc_haxe_version = new sys.io.Process('haxe', [ '-version' ] );
         if (proc_haxe_version.exitCode() != 0) {
             throw("`haxe -version` failed: " + proc_haxe_version.stderr.readAll().toString());
         }
+#if (haxe_ver >= 4)
+        var haxe_ver = proc_haxe_version.stdout.readLine();
+#else
         var haxe_ver = proc_haxe_version.stderr.readLine();
+#end
         return macro $v{haxe_ver};
     }
 }

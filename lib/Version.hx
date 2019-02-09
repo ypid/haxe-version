@@ -17,13 +17,13 @@ class Version {
             --macro Version.incrementVersion()
     **/
 
-    public static macro function incrementVersion(filename:String = 'haxelib.json'):Void {
+    public static macro function incrementVersion(filename:String = 'haxelib.json'):haxe.macro.Expr {
         var haxelib_json = haxe.Json.parse(sys.io.File.getContent(filename));
-
         var result:Array<String> = haxelib_json.version.split('.');
         result[result.length-1] = cast (Std.parseInt(result[result.length-1]) + 1);
         haxelib_json.version = result.join('.');
         sys.io.File.saveContent(filename, haxe.Json.stringify(haxelib_json, null, " "));
+        return macro null;
     }
 
     /**

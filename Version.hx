@@ -57,6 +57,23 @@ class Version {
     }
 
     /**
+        Return if the git tree is dirty. Example usage:
+
+            any changes since last commit.
+            public static var version_modified(default, never):String = Version.isGitTreeDirty();
+    **/
+    public static macro function isGitTreeDirty():haxe.macro.Expr {
+        var git_diff = new sys.io.Process('git', [ 'diff', '--quiet', 'HEAD' ] );
+        var exit = git_diff.exitCode();
+        return
+            switch exit {
+            case 0: macro false;
+            case 1: macro true;
+            case _: throw("`git diff --quiet HEAD` failed: " + git_diff.stderr.readAll().toString());
+            }
+    }
+
+    /**
         Return the version of Haxe. Example usage:
 
             Version of Haxe used to build this library.

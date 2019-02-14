@@ -1,5 +1,6 @@
 {
     "name": "version",
+    "classPath": "lib",
     "url" : "https://github.com/ypid/haxe-version",
     "license": "LGPL",
     "license_full": "LGPL-3.0",

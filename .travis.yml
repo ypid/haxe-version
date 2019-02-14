@@ -1,0 +1,14 @@
+dist: xenial
+language: haxe
+
+haxe:
+  - development
+  - stable
+  - "3.4.7"
+
+install:
+  - haxelib dev version .
+
+script:
+  - haxe --interp -main Test -lib version
+

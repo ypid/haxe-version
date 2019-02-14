@@ -17,13 +17,13 @@ class Version {
             --macro Version.incrementVersion()
     **/
 
-    public static macro function incrementVersion(filename:String = 'haxelib.json'):Void {
+    public static macro function incrementVersion(filename:String = 'haxelib.json'):haxe.macro.Expr {
         var haxelib_json = haxe.Json.parse(sys.io.File.getContent(filename));
-
         var result:Array<String> = haxelib_json.version.split('.');
         result[result.length-1] = cast (Std.parseInt(result[result.length-1]) + 1);
         haxelib_json.version = result.join('.');
         sys.io.File.saveContent(filename, haxe.Json.stringify(haxelib_json, null, " "));
+        return macro null;
     }
 
     /**
@@ -57,20 +57,38 @@ class Version {
     }
 
     /**
+        Return if the git tree is dirty. Example usage:
+
+            any changes since last commit.
+            public static var version_modified(default, never):String = Version.isGitTreeDirty();
+    **/
+    public static macro function isGitTreeDirty():haxe.macro.Expr {
+        var git_diff = new sys.io.Process('git', [ 'diff', '--quiet', 'HEAD' ] );
+        var exit = git_diff.exitCode();
+        return
+            switch exit {
+            case 0: macro false;
+            case 1: macro true;
+            case _: throw("`git diff --quiet HEAD` failed: " + git_diff.stderr.readAll().toString());
+            }
+    }
+
+    /**
         Return the version of Haxe. Example usage:
 
             Version of Haxe used to build this library.
             public static var version_haxe_compiler(default, never):String = Version.getHaxeCompilerVersion();
     **/
     public static macro function getHaxeCompilerVersion():haxe.macro.Expr {
-        // Returns float number like: 3.201
-        // var haxe_ver = haxe.macro.Context.definedValue("haxe_ver");
-
         var proc_haxe_version = new sys.io.Process('haxe', [ '-version' ] );
         if (proc_haxe_version.exitCode() != 0) {
             throw("`haxe -version` failed: " + proc_haxe_version.stderr.readAll().toString());
         }
+#if (haxe_ver >= 4)
+        var haxe_ver = proc_haxe_version.stdout.readLine();
+#else
         var haxe_ver = proc_haxe_version.stderr.readLine();
+#end
         return macro $v{haxe_ver};
     }
 }

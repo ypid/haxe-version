@@ -3,7 +3,7 @@
     "classPath": "lib",
     "url" : "https://github.com/ypid/haxe-version",
     "license": "LGPL",
-    "license_full": "LGPL-3.0",
+    "license_full": "LGPL-3.0-only",
     "tags": ["macro", "version", "git"],
     "description": "Haxe macros useful for including version strings (version from `haxelib.json`, git commit hash and Haxe version) to a target build.",
     "releasenote": "Initial release.",

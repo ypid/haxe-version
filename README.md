@@ -4,6 +4,6 @@ Haxe macros useful for including version strings (version from `haxelib.json`, g
 
 To use it, just install it via `haxelib install version` and use the `-lib version` switch for `haxe`.
 
-Refer to [Version.hx](https://github.com/ypid/haxe-version/blob/master/Version.hx) to see which macros are available and how to use them.
+Refer to [Version.hx](/lib/Version.hx) to see which macros are available and how to use them.
 
-Credits for the idea go to [Andy Li](http://blog.onthewings.net/) who presented a similar macro using `git describe --tags` in [Haxe, a language that compiles to JS](http://blog.onthewings.net/about/).
+Credits for the idea go to [Andy Li](https://blog.onthewings.net/) who presented a similar macro using `git describe --tags` in [Haxe, a language that compiles to JS](https://blog.onthewings.net/about/).

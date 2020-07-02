@@ -7,7 +7,7 @@
     "tags": ["macro", "version", "git"],
     "description": "Haxe macros useful for including version strings (version from `haxelib.json`, git commit hash and Haxe version) to a target build.",
     "releasenote": "Initial release.",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "contributors": [
       "ypid",
       "jonasmalacofilho"
